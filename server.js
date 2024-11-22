@@ -8,10 +8,10 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
-// import swaggerUi from "swagger-ui-express";
-// import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 // import postmanToOpenApi from "postman-to-openapi";
-// import swaggerJson from "./openapi.json" assert { type: "json" };
+import swaggerDocument from "./docs/openapi.json" assert { type: "json" };
 
 dotenv.config();
 
@@ -85,8 +85,8 @@ app.use("/api/v1/cart", cartRoutes);
 //   apis: ["./routes/*.js"], // Specify the paths to your route files
 // });
 
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // app.get("/swagger-json", (req, res) => {
 //   res.setHeader("Content-Type", "application/json");
 //   res.send(swaggerJson);
