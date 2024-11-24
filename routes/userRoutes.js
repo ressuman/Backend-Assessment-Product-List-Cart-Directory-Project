@@ -16,28 +16,22 @@ import {
 
 const router = express.Router();
 
+// Route to get all users (Admin Only)
 router.get("/get-all-users", authenticate, authorizeAdmin, getAllUsers);
 
+// Route to get the current logged-in user's profile
 router.get("/get-logged-user", authenticate, getCurrentUserProfile);
 
+// Route to update the current logged-in user's profile
 router.put("/update-logged-user", authenticate, updateCurrentUserProfile);
 
-// ADMIN ROUTES 👇
-// router.get("/get-single-user", authenticate, authorizeAdmin, getUserById);
+// Route to get a user by ID (Admin Only)
+router.get("/get-user/:id", authenticate, authorizeAdmin, getUserById);
 
-// router.put("/update-single-user", authenticate, authorizeAdmin, updateUserById);
+// Route to update a user by ID (Admin Only)
+router.put("/update-user/:id", authenticate, authorizeAdmin, updateUserById);
 
-// router.delete(
-//   "/delete-single-user",
-//   authenticate,
-//   authorizeAdmin,
-//   deleteUserById
-// );
-
-router
-  .route("/:id")
-  .delete(authenticate, authorizeAdmin, deleteUserById)
-  .get(authenticate, authorizeAdmin, getUserById)
-  .put(authenticate, authorizeAdmin, updateUserById);
+// Route to delete a user by ID (Admin Only)
+router.delete("/delete-user/:id", authenticate, authorizeAdmin, deleteUserById);
 
 export default router;

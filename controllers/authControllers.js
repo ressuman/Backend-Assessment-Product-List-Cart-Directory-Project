@@ -40,7 +40,7 @@ export const signup = asyncHandler(async (req, res) => {
     res.status(201).json({
       message: "User created successfully.",
       success: true,
-      token, // Include the token in the response
+      //token, // Include the token in the response
       user: {
         _id: newUser._id,
         username: newUser.username,
