@@ -47,7 +47,7 @@ const swaggerOptions = {
         description: "Local development server (HTTP)",
       },
       {
-        url: "https://api.yourdomain.com",
+        url: "https://backend-assessment-gamma.vercel.app",
         description: "Production server (HTTPS)",
       },
     ],
