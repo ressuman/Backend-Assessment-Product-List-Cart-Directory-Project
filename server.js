@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -8,7 +9,9 @@ import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocs from "./docs/openapi.json" assert { type: "json" };
+//import swaggerDocs from "./docs/openapi.json" assert { type: "json" };
+import fs from "fs";
+const swaggerDocs = JSON.parse(fs.readFileSync("./docs/openapi.json", "utf8"));
 
 dotenv.config();
 
@@ -77,6 +80,16 @@ app.use("/api/v1/cart", cartRoutes);
 // Error handler for unsupported routes
 app.use((req, res, next) => {
   res.status(404).json({ message: "API route not found" });
+});
+
+// Centralized error-handling middleware
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  console.error(err.stack);
+  res.status(statusCode).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
 });
 
 export default app;
