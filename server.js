@@ -8,7 +8,8 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
-//import swaggerUi from "swagger-ui-express";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 //import swaggerDocs from "./docs/openapi.json";
 //assert { type: "json" };
 //import fs from "fs";
@@ -17,6 +18,44 @@ import dotenv from "dotenv";
 // const swaggerDocs = JSON.parse(
 //   await fs.readFile("./docs/openapi.json", "utf-8")
 // );
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Product List and Shopping Cart API",
+      version: "1.0.0",
+      description:
+        "The Product List and Shopping Cart API is a comprehensive RESTful service designed to power eCommerce platforms. Built with Express.js and MongoDB, this API provides secure and efficient management of user accounts, product catalogs, and shopping cart operations.",
+      contact: {
+        name: "Richard Essuman",
+        email: "ressuman001@gmail.com",
+        url: "https://github.com/ressuman/Backend-Assessment-Product-List-Cart-Directory-Project.git",
+      },
+    },
+    termsOfService: "http://swagger.io/terms/",
+    license: {
+      name: "Apache 2.0",
+      url: "http://www.apache.org/licenses/LICENSE-2.0.html",
+    },
+    externalDocs: {
+      description: "Find out more about Swagger",
+      url: "http://swagger.io",
+    },
+    servers: [
+      {
+        url: "http://localhost:5030",
+        description: "Local development server (HTTP)",
+      },
+      {
+        url: "https://api.yourdomain.com",
+        description: "Production server (HTTPS)",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 dotenv.config();
 
@@ -75,7 +114,7 @@ app.get("/", (request, response) => {
   });
 });
 
-//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
