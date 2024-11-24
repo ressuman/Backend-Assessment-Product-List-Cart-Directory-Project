@@ -8,15 +8,15 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
-import swaggerUi from "swagger-ui-express";
+//import swaggerUi from "swagger-ui-express";
 //import swaggerDocs from "./docs/openapi.json";
 //assert { type: "json" };
 //import fs from "fs";
 //const swaggerDocs = JSON.parse(fs.readFileSync("./docs/openapi.json", "utf8"));
-import fs from "fs/promises";
-const swaggerDocs = JSON.parse(
-  await fs.readFile("./docs/openapi.json", "utf-8")
-);
+// import fs from "fs/promises";
+// const swaggerDocs = JSON.parse(
+//   await fs.readFile("./docs/openapi.json", "utf-8")
+// );
 
 dotenv.config();
 
@@ -75,7 +75,7 @@ app.get("/", (request, response) => {
   });
 });
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
