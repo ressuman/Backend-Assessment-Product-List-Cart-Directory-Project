@@ -9,6 +9,7 @@ import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
+import { apiDocumentation } from "./docs/api.js";
 //import swaggerDocs from "swagger-jsdoc";
 //import swaggerDocs from "./docs/openapi.json" assert { type: "json" };
 //import swaggerDocs from "./docs/test.yaml" assert { type: "yaml" };
@@ -101,7 +102,6 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
-import { apiDocumentation } from "./docs/api.js";
 
 // Mounting routes
 app.get("/", (request, response) => {
