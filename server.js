@@ -102,19 +102,19 @@ import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 
 // Mounting routes
-app.get("/", (request, response) => {
-  response.json({
-    success: true,
-    message: "Welcome to the Product List and Shopping Cart API",
-    description:
-      "Explore a range of products and manage your shopping cart with ease. This API is designed to provide robust features for seamless eCommerce integration.",
-    status: "Server is operational and running smoothly.",
-    documentation:
-      "Visit /api-docs for API usage guidelines and documentation.",
-  });
-});
+// app.get("/", (request, response) => {
+//   response.json({
+//     success: true,
+//     message: "Welcome to the Product List and Shopping Cart API",
+//     description:
+//       "Explore a range of products and manage your shopping cart with ease. This API is designed to provide robust features for seamless eCommerce integration.",
+//     status: "Server is operational and running smoothly.",
+//     documentation:
+//       "Visit /api-docs for API usage guidelines and documentation.",
+//   });
+// });
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
