@@ -9,53 +9,54 @@ import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import swaggerJsdoc from "swagger-jsdoc";
-//import swaggerDocs from "./docs/openapi.json";
-//assert { type: "json" };
+//import swaggerDocs from "swagger-jsdoc";
+//import swaggerDocs from "./docs/openapi.json" assert { type: "json" };
+//import swaggerDocs from "./docs/test.yaml" assert { type: "yaml" };
+const swaggerDocs = apiDocumentation;
 //import fs from "fs";
 //const swaggerDocs = JSON.parse(fs.readFileSync("./docs/openapi.json", "utf8"));
 // import fs from "fs/promises";
 // const swaggerDocs = JSON.parse(
 //   await fs.readFile("./docs/openapi.json", "utf-8")
 // );
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Product List and Shopping Cart API",
-      version: "1.0.0",
-      description:
-        "The Product List and Shopping Cart API is a comprehensive RESTful service designed to power eCommerce platforms. Built with Express.js and MongoDB, this API provides secure and efficient management of user accounts, product catalogs, and shopping cart operations.",
-      contact: {
-        name: "Richard Essuman",
-        email: "ressuman001@gmail.com",
-        url: "https://github.com/ressuman/Backend-Assessment-Product-List-Cart-Directory-Project.git",
-      },
-    },
-    termsOfService: "http://swagger.io/terms/",
-    license: {
-      name: "Apache 2.0",
-      url: "http://www.apache.org/licenses/LICENSE-2.0.html",
-    },
-    externalDocs: {
-      description: "Find out more about Swagger",
-      url: "http://swagger.io",
-    },
-    servers: [
-      {
-        url: "http://localhost:5030",
-        description: "Local development server (HTTP)",
-      },
-      {
-        url: "https://backend-assessment-gamma.vercel.app",
-        description: "Production server (HTTPS)",
-      },
-    ],
-  },
-  apis: ["./routes/*.js"],
-};
+// const swaggerOptions = {
+//   definition: {
+//     openapi: "3.0.0",
+//     info: {
+//       title: "Product List and Shopping Cart API",
+//       version: "1.0.0",
+//       description:
+//         "The Product List and Shopping Cart API is a comprehensive RESTful service designed to power eCommerce platforms. Built with Express.js and MongoDB, this API provides secure and efficient management of user accounts, product catalogs, and shopping cart operations.",
+//       contact: {
+//         name: "Richard Essuman",
+//         email: "ressuman001@gmail.com",
+//         url: "https://github.com/ressuman/Backend-Assessment-Product-List-Cart-Directory-Project.git",
+//       },
+//     },
+//     termsOfService: "http://swagger.io/terms/",
+//     license: {
+//       name: "Apache 2.0",
+//       url: "http://www.apache.org/licenses/LICENSE-2.0.html",
+//     },
+//     externalDocs: {
+//       description: "Find out more about Swagger",
+//       url: "http://swagger.io",
+//     },
+//     servers: [
+//       {
+//         url: "http://localhost:5030",
+//         description: "Local development server (HTTP)",
+//       },
+//       {
+//         url: "https://backend-assessment-gamma.vercel.app",
+//         description: "Production server (HTTPS)",
+//       },
+//     ],
+//   },
+//   apis: ["./routes/*.js"],
+// };
 
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
+//const swaggerDocs = swaggerJsdoc(swaggerOptions);
 
 dotenv.config();
 
@@ -100,21 +101,22 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
+import { apiDocumentation } from "./docs/api.js";
 
 // Mounting routes
-// app.get("/", (request, response) => {
-//   response.json({
-//     success: true,
-//     message: "Welcome to the Product List and Shopping Cart API",
-//     description:
-//       "Explore a range of products and manage your shopping cart with ease. This API is designed to provide robust features for seamless eCommerce integration.",
-//     status: "Server is operational and running smoothly.",
-//     documentation:
-//       "Visit /api-docs for API usage guidelines and documentation.",
-//   });
-// });
+app.get("/", (request, response) => {
+  response.json({
+    success: true,
+    message: "Welcome to the Product List and Shopping Cart API",
+    description:
+      "Explore a range of products and manage your shopping cart with ease. This API is designed to provide robust features for seamless eCommerce integration.",
+    status: "Server is operational and running smoothly.",
+    documentation:
+      "Visit /api-docs for API usage guidelines and documentation.",
+  });
+});
 
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
