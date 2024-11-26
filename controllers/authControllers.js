@@ -34,7 +34,7 @@ export const signup = asyncHandler(async (req, res) => {
 
     // Save the user and generate a token
     await newUser.save();
-    const token = createToken(res, newUser._id);
+    //const token = createToken(res, newUser._id);
 
     // Respond with user details and token
     res.status(201).json({
