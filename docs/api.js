@@ -26,7 +26,7 @@ export const apiDocumentation = {
       description: "Local development server (HTTP)",
     },
     {
-      url: "https://api.yourdomain.com",
+      url: "https://backend-product-list-cart-directory-api-ui.vercel.app",
       description: "Production server (HTTPS)",
     },
   ],

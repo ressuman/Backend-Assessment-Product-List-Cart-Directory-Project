@@ -15,7 +15,7 @@ import { apiDocumentation } from "./docs/api.js";
 
 const swaggerDocs = apiDocumentation;
 const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.3.0/swagger-ui.min.css";
 //import fs from "fs";
 //const swaggerDocs = JSON.parse(fs.readFileSync("./docs/openapi.json", "utf8"));
 // import fs from "fs/promises";
