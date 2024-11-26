@@ -1,8 +1,13 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "./errorHandler.js";
 import User from "../models/userModel.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const authenticate = asyncHandler(async (req, res, next) => {
+  console.log("Headers:", req.headers);
+  console.log("Cookies:", req.cookies);
+
   let token;
 
   if (
@@ -15,14 +20,19 @@ const authenticate = asyncHandler(async (req, res, next) => {
   }
 
   if (token) {
+    console.log("Token:", token);
+    const secretKey = process.env.JWT_SECRET_KEY || "product-cart-shop";
+
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      const decoded = jwt.verify(token, secretKey);
       req.user = await User.findById(decoded.userId).select("-password");
+
       next();
     } catch (error) {
       res.status(401).send("Not authorized, token failed.");
     }
   } else {
+    console.error("No token provided");
     res.status(401).send("Not authorized, no token.");
   }
 });

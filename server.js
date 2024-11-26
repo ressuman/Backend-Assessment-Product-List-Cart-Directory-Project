@@ -75,7 +75,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // CORS configuration
-app.use(cors());
+app.use(
+  cors({
+    // origin: "https://backend-assessment-gamma.vercel.app",
+    credentials: true,
+  })
+);
 
 // Body parser
 app.use(express.json());
