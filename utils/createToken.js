@@ -3,7 +3,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const generateToken = (res, userId) => {
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET_KEY, {
+  const secretKey = process.env.JWT_SECRET_KEY || "product-cart-shop";
+
+  if (!secretKey) {
+    throw new Error("JWT_SECRET_KEY is not defined");
+  }
+
+  const token = jwt.sign({ userId }, secretKey, {
     expiresIn: "30d",
   });
 
