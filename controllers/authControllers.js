@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import asyncHandler from "../middlewares/errorHandler.js";
 import User from "../models/userModel.js";
 import createToken from "../utils/createToken.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const signup = asyncHandler(async (req, res) => {
   const { username, email, password, isAdmin } = req.body;
