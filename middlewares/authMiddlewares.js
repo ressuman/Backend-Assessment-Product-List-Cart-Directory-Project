@@ -26,6 +26,7 @@ const authenticate = asyncHandler(async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, secretKey);
       req.user = await User.findById(decoded.userId).select("-password");
+      console.log("Decoded payload:", decoded);
 
       next();
     } catch (error) {

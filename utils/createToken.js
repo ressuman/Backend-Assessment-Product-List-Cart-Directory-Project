@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const generateToken = (res, userId) => {
-  const secretKey = process.env.JWT_SECRET_KEY || "product-cart-shop";
+  const secretKey = process.env.JWT_SECRET_KEY || "test-secret-key";
 
   if (!secretKey) {
     throw new Error("JWT_SECRET_KEY is not defined");
