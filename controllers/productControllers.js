@@ -6,31 +6,60 @@ export const addProduct = asyncHandler(async (req, res) => {
   try {
     const { name, description, price, category, quantity, brand } = req.body;
 
-    // Validation
-    if (!name)
-      return res
-        .status(400)
-        .json({ error: "Name is required", success: false });
-    if (!brand)
-      return res
-        .status(400)
-        .json({ error: "Brand is required", success: false });
-    if (!description)
-      return res
-        .status(400)
-        .json({ error: "Description is required", success: false });
-    if (!price)
-      return res
-        .status(400)
-        .json({ error: "Price is required", success: false });
-    if (!category)
-      return res
-        .status(400)
-        .json({ error: "Category is required", success: false });
-    if (!quantity)
-      return res
-        .status(400)
-        .json({ error: "Quantity is required", success: false });
+    // // Validation
+    // if (!name)
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Name is required", success: false });
+    // if (!brand)
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Brand is required", success: false });
+    // if (!description)
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Description is required", success: false });
+    // if (!price)
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Price is required", success: false });
+    // if (!category)
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Category is required", success: false });
+    // if (!quantity)
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Quantity is required", success: false });
+
+    const errors = [];
+    const requiredFields = [
+      "name",
+      "description",
+      "price",
+      "category",
+      "quantity",
+      "brand",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!req.body[field]) {
+        errors.push(
+          `${field.charAt(0).toUpperCase() + field.slice(1)} is required`
+        );
+      }
+    });
+
+    if (req.body.price <= 0) {
+      errors.push("Price must be greater than 0");
+    }
+
+    if (errors.length > 0) {
+      return res.status(400).json({
+        error: errors,
+        success: false,
+      });
+    }
 
     const product = new Product({ ...req.body, createdBy: req.user._id });
     await product.save();

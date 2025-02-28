@@ -17,6 +17,6 @@ router.post("/add-items-to-cart", authenticate, addToCart);
 
 router.put("/cart-items/:id", authenticate, updateCart);
 
-router.delete("/cart-item/:id", authenticate, removeFromCart);
+router.delete("/cart-item/:itemId", authenticate, removeFromCart);
 
 export default router;
