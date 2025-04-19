@@ -167,3 +167,9 @@ Errors are handled using the custom middleware `errorHandler.js`, which ensures 
 ## **License**
 
 This project is licensed under the MIT License.
+
+## Image
+
+Here is an expected gif/photos of the preview of the App(Ecommerce Product API)
+
+## ![Ecommerce Product API image](./image/product-list.png)
